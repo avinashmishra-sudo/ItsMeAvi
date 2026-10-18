@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { FileText, Download, Briefcase, GraduationCap, CheckCircle2, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { portfolioData } from "@/lib/data/portfolio-data";
 
@@ -47,34 +48,45 @@ export default function ResumePage() {
         <div className="bg-white rounded-3xl p-8 sm:p-14 border border-gray-200/80 shadow-xs space-y-12">
           {/* Header inside Resume */}
           <div className="border-b border-gray-100 pb-8 flex flex-col sm:flex-row sm:items-start justify-between gap-6">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-950 tracking-tight">
-                {meta.name}
-              </h2>
-              <p className="text-sm font-bold text-accent-blue mt-1 uppercase tracking-wider">
-                {meta.eyebrow}
-              </p>
-              <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 mt-2 font-medium">
-                <span>{contact.location}</span>
-                <span>•</span>
-                <span>{contact.phone}</span>
-                <span>•</span>
-                <a href={`mailto:${contact.email}`} className="text-navy-950 hover:underline">
-                  {contact.email}
-                </a>
-                <span>•</span>
-                <a
-                  href={contact.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-navy-950 hover:underline"
-                >
-                  linkedin.com/in/avinashmishraa/
-                </a>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-stone-100 border border-gray-200/80 shadow-xs flex-shrink-0">
+                <Image
+                  src="/images/profile.jpg"
+                  alt={meta.name}
+                  fill
+                  className="object-cover object-center"
+                  sizes="96px"
+                />
+              </div>
+              <div>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-950 tracking-tight">
+                  {meta.name}
+                </h2>
+                <p className="text-sm font-bold text-accent-blue mt-1 uppercase tracking-wider">
+                  {meta.eyebrow}
+                </p>
+                <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 mt-2 font-medium">
+                  <span>{contact.location}</span>
+                  <span>•</span>
+                  <span>{contact.phone}</span>
+                  <span>•</span>
+                  <a href={`mailto:${contact.email}`} className="text-navy-950 hover:underline">
+                    {contact.email}
+                  </a>
+                  <span>•</span>
+                  <a
+                    href={contact.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-navy-950 hover:underline"
+                  >
+                    linkedin.com/in/avinashmishraa/
+                  </a>
+                </div>
               </div>
             </div>
 
-            <div className="inline-flex items-center space-x-2 bg-stone-50 border border-stone-200 px-3.5 py-1.5 rounded-xl text-xs text-gray-700 font-semibold">
+            <div className="inline-flex items-center space-x-2 bg-stone-50 border border-stone-200 px-3.5 py-1.5 rounded-xl text-xs text-gray-700 font-semibold self-start sm:self-auto">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
               <span>Master Resume Draft</span>
             </div>

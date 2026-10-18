@@ -1,12 +1,23 @@
 [
   {
+    "id": "res-1792335640569",
+    "version_label": "Senior Graphic Designer Resume – October 2026",
+    "description": "",
+    "file_url": "/resumes/1792335640566_Avinash_Mishra_Resume_O.pdf",
+    "file_name": "Avinash_Mishra_Resume_O.pdf",
+    "file_size_bytes": 140876,
+    "is_published": true,
+    "published_at": "2026-10-18T15:00:40.569Z",
+    "created_at": "2026-10-18T15:00:40.569Z"
+  },
+  {
     "id": "res-1792335051471",
     "version_label": "Avinash Mishra — Updated Resume",
     "description": "Updated resume uploaded via Admin Panel",
     "file_url": "/resumes/1792335051471_Avinash_Mishra_Resume_O.pdf",
     "file_name": "Avinash_Mishra_Resume_O.pdf",
     "file_size_bytes": 140876,
-    "is_published": true,
+    "is_published": false,
     "published_at": "2026-10-18T14:50:51.000Z",
     "created_at": "2026-10-18T14:50:51.000Z"
   },

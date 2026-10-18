@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Sparkles, GraduationCap, ArrowRight, Download, CheckCircle2 } from "lucide-react";
 import { portfolioData } from "@/lib/data/portfolio-data";
 
@@ -81,9 +82,27 @@ export default function AboutPage() {
               </a>
             </div>
           </div>
-
           {/* Sidebar: Education & Strengths */}
           <div className="lg:col-span-4 space-y-6">
+            {/* Profile Card */}
+            <div className="bg-white p-5 rounded-3xl border border-gray-200/80 space-y-4 shadow-xs">
+              <div className="relative w-full aspect-[4/4.2] rounded-2xl overflow-hidden bg-stone-100 border border-gray-200/60 shadow-inner">
+                <Image
+                  src="/images/profile.jpg"
+                  alt="Avinash Mishra — Professional Profile"
+                  fill
+                  priority
+                  className="object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, 360px"
+                />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-base font-bold text-navy-950">Avinash Mishra</h3>
+                <p className="text-[11px] font-bold text-accent-blue uppercase tracking-wider">{meta.eyebrow}</p>
+                <p className="text-xs text-gray-500">10+ Years Experience • India</p>
+              </div>
+            </div>
+
             <div className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200/80 space-y-6">
               <h3 className="text-base font-bold text-navy-950 flex items-center space-x-2 border-b border-gray-100 pb-3">
                 <GraduationCap className="w-5 h-5 text-accent-blue" />

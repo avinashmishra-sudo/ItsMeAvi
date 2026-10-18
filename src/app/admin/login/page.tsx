@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Lock, Mail, ArrowLeft, Loader2, ShieldCheck, AlertCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -55,8 +56,14 @@ export default function AdminLoginPage() {
       <div className="bg-navy-900 border border-navy-800 rounded-3xl p-8 sm:p-10 shadow-2xl space-y-6">
         {/* Monogram header */}
         <div className="text-center space-y-3">
-          <div className="w-12 h-12 rounded-2xl bg-navy-950 border border-gold-500/40 flex items-center justify-center text-gold-400 font-bold text-lg mx-auto shadow-md">
-            AM
+          <div className="w-14 h-14 rounded-2xl overflow-hidden bg-navy-950 border border-gold-500/50 relative mx-auto shadow-lg">
+            <Image
+              src="/images/profile.jpg"
+              alt="Avinash Mishra"
+              fill
+              className="object-cover object-center"
+              sizes="56px"
+            />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-white tracking-tight">Admin Console</h1>

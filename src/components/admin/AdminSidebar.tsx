@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
@@ -51,8 +52,14 @@ export default function AdminSidebar() {
       <div className="space-y-6">
         {/* Brand */}
         <div className="px-3 py-2 flex items-center space-x-3 border-b border-navy-800/80 pb-5">
-          <div className="w-9 h-9 rounded-lg bg-navy-900 border border-gold-500/40 flex items-center justify-center text-gold-400 font-bold text-sm tracking-wider">
-            AM
+          <div className="w-9 h-9 rounded-xl overflow-hidden bg-navy-900 border border-gold-500/40 relative flex-shrink-0 shadow-sm">
+            <Image
+              src="/images/profile.jpg"
+              alt="Avinash Mishra"
+              fill
+              className="object-cover object-center"
+              sizes="36px"
+            />
           </div>
           <div>
             <span className="text-white font-bold text-sm block">Admin Console</span>

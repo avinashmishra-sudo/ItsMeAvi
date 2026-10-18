@@ -49,7 +49,7 @@ export const initialProfile: Profile = {
   email: "avimishra890@gmail.com",
   phone: "+91-8905056633",
   location: "India",
-  avatar_url: "/images/logo.png",
+  avatar_url: "/images/profile.jpg",
   cta_primary_label: "Explore My Work",
   cta_primary_url: "/#projects",
   cta_secondary_label: "Download Resume",

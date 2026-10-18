@@ -46,6 +46,7 @@ export const portfolioData = {
     primaryCta: "Explore My Work",
     secondaryCta: "Download Resume",
     viewResumeCta: "View Resume",
+    avatarUrl: "/images/profile.jpg",
   },
 
   contact: {
