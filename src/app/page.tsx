@@ -3,6 +3,7 @@ import AboutSection from "@/components/home/AboutSection";
 import ExpertiseSection from "@/components/home/ExpertiseSection";
 import ExperienceSection from "@/components/home/ExperienceSection";
 import ProjectsSection from "@/components/home/ProjectsSection";
+import YouTubeSection from "@/components/home/YouTubeSection";
 import IndustryExperienceSection from "@/components/home/IndustryExperienceSection";
 import StrengthsSection from "@/components/home/StrengthsSection";
 import EducationSection from "@/components/home/EducationSection";
@@ -26,7 +27,10 @@ export default function HomePage() {
       {/* 5. Selected Projects & Prototypes */}
       <ProjectsSection />
 
-      {/* 6. Industry Experience (BFSI, E-comm, Media, TV) */}
+      {/* 6. Creative Media & Video Storytelling (YouTube) */}
+      <YouTubeSection />
+
+      {/* 7. Industry Experience (BFSI, E-comm, Media, TV) */}
       <IndustryExperienceSection />
 
       {/* 7. Professional Strengths ("What I Bring to a Team") */}

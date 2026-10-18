@@ -312,11 +312,28 @@ export async function getAllResumeVersions(): Promise<ResumeVersion[]> {
   }
 }
 
+export function getLocalYouTubeVideos(): YouTubeVideo[] {
+  try {
+    const filePath = path.join(process.cwd(), "src", "lib", "data", "youtube-videos.json");
+    if (fs.existsSync(filePath)) {
+      const content = fs.readFileSync(filePath, "utf-8");
+      const parsed = JSON.parse(content);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed as YouTubeVideo[];
+      }
+    }
+  } catch (err) {
+    console.error("Error reading youtube-videos.json:", err);
+  }
+  return initialYouTubeVideos;
+}
+
 export async function getYouTubeVideos(limit = 6): Promise<YouTubeVideo[]> {
   try {
     const supabase = await createServerSupabaseClient();
     if (!supabase) {
-      return initialYouTubeVideos.slice(0, limit);
+      const videos = getLocalYouTubeVideos();
+      return videos.filter((v) => v.is_visible).slice(0, limit);
     }
 
     const { data, error } = await supabase
@@ -329,18 +346,20 @@ export async function getYouTubeVideos(limit = 6): Promise<YouTubeVideo[]> {
       .limit(limit);
 
     if (error || !data || data.length === 0) {
-      return initialYouTubeVideos.slice(0, limit);
+      const videos = getLocalYouTubeVideos();
+      return videos.filter((v) => v.is_visible).slice(0, limit);
     }
     return data as YouTubeVideo[];
   } catch {
-    return initialYouTubeVideos.slice(0, limit);
+    const videos = getLocalYouTubeVideos();
+    return videos.filter((v) => v.is_visible).slice(0, limit);
   }
 }
 
 export async function getAllYouTubeVideos(): Promise<YouTubeVideo[]> {
   try {
     const supabase = await createServerSupabaseClient();
-    if (!supabase) return initialYouTubeVideos;
+    if (!supabase) return getLocalYouTubeVideos();
 
     const { data, error } = await supabase
       .from("youtube_videos")
@@ -348,10 +367,10 @@ export async function getAllYouTubeVideos(): Promise<YouTubeVideo[]> {
       .order("display_order", { ascending: true })
       .order("published_at", { ascending: false });
 
-    if (error || !data) return initialYouTubeVideos;
+    if (error || !data || data.length === 0) return getLocalYouTubeVideos();
     return data as YouTubeVideo[];
   } catch {
-    return initialYouTubeVideos;
+    return getLocalYouTubeVideos();
   }
 }
 
