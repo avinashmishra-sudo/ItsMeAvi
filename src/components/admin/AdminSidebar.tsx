@@ -36,6 +36,10 @@ export default function AdminSidebar() {
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
 
+  if (pathname === "/admin/login") {
+    return null;
+  }
+
   const handleLogout = async () => {
     setLoggingOut(true);
     try {

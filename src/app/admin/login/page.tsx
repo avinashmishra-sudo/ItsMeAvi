@@ -52,8 +52,8 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="w-full max-w-md p-6 sm:p-8">
-      <div className="bg-navy-900 border border-navy-800 rounded-3xl p-8 sm:p-10 shadow-2xl space-y-6">
+    <div className="min-h-[75vh] flex items-center justify-center py-6 px-4">
+      <div className="w-full max-w-md bg-navy-900 border border-navy-800 rounded-3xl p-8 sm:p-10 shadow-2xl space-y-6">
         {/* Monogram header */}
         <div className="text-center space-y-3">
           <div className="w-14 h-14 rounded-2xl overflow-hidden bg-navy-950 border border-gold-500/50 relative mx-auto shadow-lg">
