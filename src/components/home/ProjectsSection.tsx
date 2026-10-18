@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { FolderGit2, ExternalLink, Sparkles, Layers, Info, CheckCircle, Clock } from "lucide-react";
+import Image from "next/image";
+import { FolderGit2, ExternalLink, Sparkles, Layers, Info, CheckCircle } from "lucide-react";
 import { portfolioData, ProjectItem } from "@/lib/data/portfolio-data";
 
 const categories = [
@@ -22,20 +23,20 @@ export default function ProjectsSection() {
       : projects.filter((p) => p.category === selectedCategory);
 
   return (
-    <section id="projects" className="py-24 bg-[#faf9f5] border-b border-gray-200/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <section id="projects" className="py-14 sm:py-16 md:py-20 bg-[#faf9f5] border-b border-gray-200/60">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div className="max-w-3xl space-y-3">
+          <div className="max-w-3xl space-y-2.5">
             <div className="inline-flex items-center space-x-2 text-xs font-bold tracking-widest text-accent-blue uppercase bg-blue-50 px-3 py-1 rounded-md border border-blue-100">
               <FolderGit2 className="w-3.5 h-3.5 text-accent-blue" />
-              <span>Independent Projects</span>
+              <span>Portfolio Work &amp; Prototypes</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-navy-950 tracking-tight">
-              Selected Work &amp; Prototypes
+              Selected Projects &amp; Case Studies
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 font-normal">
-              A collection of digital learning courseware, independent content ventures, and emerging AI-assisted development workflows.
+            <p className="text-sm sm:text-base text-gray-600 font-normal">
+              A curated collection of digital learning courseware, interactive application prototypes, and content creation workflows.
             </p>
           </div>
 
@@ -58,62 +59,59 @@ export default function ProjectsSection() {
         </div>
 
         {/* Project Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+              className="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
             >
-              {/* Tasteful CSS Visual Placeholder / Screenshot Preview */}
-              <div className="relative aspect-[16/9] w-full bg-stone-900 overflow-hidden flex flex-col items-center justify-center p-6 text-center select-none">
-                {/* Abstract geometric background elements */}
-                <div className="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
-                <div className="absolute -top-12 -right-12 w-40 h-40 bg-accent-blue/10 rounded-full blur-2xl" />
-
-                <div className="relative z-10 space-y-2">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-gold-400 block font-semibold">
-                    {project.category}
-                  </span>
-                  <p className="text-base font-bold text-white max-w-xs mx-auto">
-                    {project.imagePlaceholderText}
-                  </p>
-                  <span className="text-[11px] text-gray-400 block">
-                    {project.detailsConfirmed ? "Verified Demonstration" : "Placeholder • Screenshot to be added"}
-                  </span>
-                </div>
-
-                {/* Badge top right */}
-                {project.badge && (
-                  <div className="absolute top-4 right-4 bg-navy-950/90 text-white text-[10px] font-bold px-3 py-1 rounded-full border border-gray-700/80">
-                    {project.badge}
+              {/* Visual Project Thumbnail Header */}
+              <div className="relative aspect-[16/9] w-full bg-navy-950 overflow-hidden">
+                {project.imageUrl ? (
+                  <Image
+                    src={project.imageUrl}
+                    alt={project.title}
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 600px"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-navy-950 text-gold-400">
+                    <FolderGit2 className="w-10 h-10" />
                   </div>
                 )}
+
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/25 to-transparent pointer-events-none" />
+
+                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white pointer-events-none">
+                  <span className="text-[11px] font-mono uppercase font-bold text-gold-400 tracking-wider">
+                    {project.category}
+                  </span>
+                  {project.badge && (
+                    <span className="text-[10px] uppercase font-bold px-2.5 py-1 rounded-full bg-navy-950/90 border border-white/20 text-white shadow-sm">
+                      {project.badge}
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* Card Details */}
-              <div className="p-7 sm:p-8 flex-1 flex flex-col justify-between space-y-5">
-                <div className="space-y-3">
+              <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-4">
+                <div className="space-y-2.5">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold uppercase tracking-wider text-accent-blue">
                       {project.category}
                     </span>
 
-                    {project.detailsConfirmed ? (
-                      <span className="inline-flex items-center space-x-1 text-[11px] text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded">
-                        <CheckCircle className="w-3 h-3" />
-                        <span>Confirmed Detail</span>
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center space-x-1 text-[11px] text-amber-700 font-semibold bg-amber-50 px-2 py-0.5 rounded">
-                        <Clock className="w-3 h-3" />
-                        <span>Details to be added</span>
-                      </span>
-                    )}
+                    <span className="inline-flex items-center space-x-1 text-[11px] text-accent-blue font-semibold bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+                      <CheckCircle className="w-3 h-3 text-accent-blue" />
+                      <span>{project.statusText || "Featured Case"}</span>
+                    </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-navy-950">{project.title}</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-navy-950 leading-snug">{project.title}</h3>
 
-                  <p className="text-sm text-gray-600 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal">
                     {project.description}
                   </p>
                 </div>

@@ -29,8 +29,8 @@ export default function ExpertiseSection() {
   const { expertise, skillGroups } = portfolioData;
 
   return (
-    <section id="expertise" className="py-24 bg-[#faf9f5] border-b border-gray-200/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <section id="expertise" className="py-14 sm:py-16 md:py-20 bg-[#faf9f5] border-b border-gray-200/60">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         {/* Section Header */}
         <div className="max-w-3xl space-y-3">
           <div className="inline-flex items-center space-x-2 text-xs font-bold tracking-widest text-accent-blue uppercase bg-blue-50 px-3 py-1 rounded-md border border-blue-100">

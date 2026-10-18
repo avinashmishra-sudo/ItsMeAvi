@@ -14,20 +14,20 @@ export default function ResumePage() {
     portfolioData;
 
   return (
-    <div className="bg-[#faf9f5] min-h-screen pt-28 pb-20">
+    <div className="bg-[#faf9f5] min-h-screen pt-20 pb-16">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200/60 py-16">
+      <div className="bg-white border-b border-gray-200/60 py-10 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="max-w-3xl space-y-4">
+            <div className="max-w-3xl space-y-3">
               <div className="inline-flex items-center space-x-2 text-xs font-bold tracking-widest text-accent-blue uppercase bg-blue-50 px-3 py-1 rounded-md border border-blue-100">
                 <FileText className="w-3.5 h-3.5 text-accent-blue" />
                 <span>Curriculum Vitae</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-navy-950">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-navy-950">
                 Official Resume
               </h1>
-              <p className="text-lg text-gray-600 leading-relaxed font-normal">
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
                 {meta.eyebrow} • 10+ Years Experience
               </p>
             </div>
@@ -44,7 +44,7 @@ export default function ResumePage() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="bg-white rounded-3xl p-8 sm:p-14 border border-gray-200/80 shadow-xs space-y-12">
           {/* Header inside Resume */}
           <div className="border-b border-gray-100 pb-8 flex flex-col sm:flex-row sm:items-start justify-between gap-6">

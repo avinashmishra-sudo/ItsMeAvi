@@ -5,9 +5,9 @@ export default function AboutSection() {
   const { about } = portfolioData;
 
   return (
-    <section id="about" className="py-24 bg-white border-b border-gray-200/60">
+    <section id="about" className="py-14 sm:py-16 md:py-20 bg-white border-b border-gray-200/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Heading & Narrative */}
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center space-x-2 text-xs font-bold tracking-widest text-accent-blue uppercase bg-blue-50 px-3 py-1 rounded-md border border-blue-100">

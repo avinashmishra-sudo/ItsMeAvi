@@ -9,10 +9,10 @@ export default async function YouTubeSection() {
   if (!videos || videos.length === 0) return null;
 
   return (
-    <section id="youtube" className="py-24 bg-white border-b border-gray-200/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <section id="youtube" className="py-14 sm:py-16 md:py-20 bg-white border-b border-gray-200/60">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-gray-100 pb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-gray-100 pb-6">
           <div className="max-w-2xl space-y-3">
             <div className="inline-flex items-center space-x-2 text-xs font-bold tracking-widest text-accent-blue uppercase bg-blue-50 px-3 py-1 rounded-md border border-blue-100">
               <Youtube className="w-3.5 h-3.5 text-red-500" />

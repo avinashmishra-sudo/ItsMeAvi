@@ -14,26 +14,26 @@ export default function AboutPage() {
   const { about, education, contact, meta } = portfolioData;
 
   return (
-    <div className="bg-[#faf9f5] min-h-screen pt-28 pb-20">
+    <div className="bg-[#faf9f5] min-h-screen pt-20 pb-16">
       {/* Editorial Header */}
-      <div className="bg-white border-b border-gray-200/60 py-16">
+      <div className="bg-white border-b border-gray-200/60 py-10 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-4">
+          <div className="max-w-3xl space-y-3">
             <div className="inline-flex items-center space-x-2 text-xs font-bold tracking-widest text-accent-blue uppercase bg-blue-50 px-3 py-1 rounded-md border border-blue-100">
               <Sparkles className="w-3.5 h-3.5 text-accent-blue" />
               <span>Professional Narrative</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-navy-950">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-navy-950">
               About Avinash Mishra
             </h1>
-            <p className="text-lg text-gray-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
               10+ years across BFSI, e-commerce, television post-production, and digital learning. Connecting strategy, storytelling, creative execution, and technology.
             </p>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Main Story */}
           <div className="lg:col-span-8 space-y-8 bg-white p-8 sm:p-12 rounded-3xl border border-gray-200/80 shadow-xs">

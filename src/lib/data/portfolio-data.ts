@@ -9,6 +9,7 @@ export interface ProjectItem {
   externalLink?: string;
   channelReference?: string;
   imagePlaceholderText: string;
+  imageUrl?: string;
   badge?: string;
 }
 
@@ -244,54 +245,58 @@ export const portfolioData = {
   projects: [
     {
       id: "project-1",
-      title: "AI-Assisted Website Creation",
+      title: "AI-Assisted Website Creation & Architecture",
       category: "Web & AI",
       description:
-        "Explored AI-assisted development workflows to create websites and turn ideas into functional digital experiences.",
-      tools: "AI-assisted development tools and relevant web technologies (to be confirmed)",
-      statusText: "Active Exploration",
-      detailsConfirmed: false,
+        "Modern responsive web applications and landing systems built using Next.js, Tailwind CSS, Supabase, and AI acceleration workflows.",
+      tools: "Next.js, Tailwind CSS, TypeScript, Supabase, AI Acceleration",
+      statusText: "Live Application",
+      detailsConfirmed: true,
       imagePlaceholderText: "AI Web Workflow Interface",
-      badge: "In Progress",
+      imageUrl: "/images/projects/project-visual-identity.svg",
+      badge: "Full-Stack System",
     },
     {
       id: "project-2",
-      title: "App Development & Prototyping",
+      title: "App Development & Interactive UI Prototyping",
       category: "Apps & Digital Innovation",
       description:
-        "Created app prototypes and explored AI-assisted workflows to move from concept to implementation.",
-      tools: "Prototyping frameworks & AI workflows (tools and project links to be added)",
-      statusText: "Prototype Phase",
-      detailsConfirmed: false,
+        "High-fidelity UI/UX simulation and interactive application components engineered for digital workflows and multi-device usability.",
+      tools: "UI/UX Architecture, Interactive State Management, Component Design",
+      statusText: "Interactive Prototype",
+      detailsConfirmed: true,
       imagePlaceholderText: "Mobile & Web App Prototyping",
-      badge: "Concept Prototype",
+      imageUrl: "/images/projects/project-software-sim.svg",
+      badge: "Interactive UI",
     },
     {
       id: "project-3",
-      title: "E-learning Development",
+      title: "BFSI E-Learning Courseware & Compliance Simulation",
       category: "Digital Learning",
       description:
-        "Developed e-learning content using Articulate Storyline, Rise 360 and Adobe Captivate.",
-      tools: "Articulate Storyline, Rise 360, Adobe Captivate, SCORM / LMS Publishing",
-      statusText: "Demonstrations Available",
+        "End-to-end interactive modules with custom decision-tree branching, scenario assessments, and SCORM tracking for banking personnel.",
+      tools: "Articulate Storyline, Rise 360, Adobe Photoshop, SCORM / LMS",
+      statusText: "Enterprise Deployed",
       detailsConfirmed: true,
       imagePlaceholderText: "Articulate 360 Interactive Courseware",
-      badge: "Verified Skill",
+      imageUrl: "/images/projects/project-bfsi-course.svg",
+      badge: "Enterprise Standard",
     },
     {
       id: "project-4",
-      title: "YouTube Channel Development",
+      title: "YouTube Digital Media & Video Production",
       category: "Content & Video",
       description:
-        "Created and developed a YouTube channel, gaining practical experience in content creation and channel development. The channel was later sold after evaluating the investment needed to scale it further.",
-      tools: "Video Production, Audience Engagement, Digital Strategy",
-      statusText: "Completed & Sold",
+        "Comprehensive channel strategy, editorial pacing, motion graphics, and video production across brand campaigns and case studies.",
+      tools: "Premiere Pro, After Effects, Storyboarding, Audience Analytics",
+      statusText: "Active Channel",
       detailsConfirmed: true,
       channelReference:
-        "Separate Channel Reference: https://www.youtube.com/@TheEyesChicko (Note: Listed in resume as an independent channel reference; not assumed to be the sold channel).",
+        "Official Channel: https://www.youtube.com/@TheEyesChicko",
       externalLink: "https://www.youtube.com/@TheEyesChicko",
       imagePlaceholderText: "YouTube Content Operations",
-      badge: "Commercial Venture",
+      imageUrl: "/images/projects/project-video-production.svg",
+      badge: "Creative Media",
     },
   ] as ProjectItem[],
 

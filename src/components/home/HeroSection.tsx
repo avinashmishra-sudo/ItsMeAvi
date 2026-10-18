@@ -7,14 +7,14 @@ export default function HeroSection() {
   const { meta, contact } = portfolioData;
 
   return (
-    <section id="home" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#faf9f5] border-b border-gray-200/60">
+    <section id="home" className="relative pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-32 md:pb-20 overflow-hidden bg-[#faf9f5] border-b border-gray-200/60">
       {/* Subtle Ambient Grid Background */}
       <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* Left Column: Editorial Headline & Copy */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-6 sm:space-y-7">
             {/* Eyebrow badge */}
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md bg-stone-100 border border-stone-200 text-charcoal-800 text-[11px] font-bold tracking-widest uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse"></span>

@@ -12,26 +12,26 @@ export default function ExperiencePage() {
   const { experience, contact } = portfolioData;
 
   return (
-    <div className="bg-[#faf9f5] min-h-screen pt-28 pb-20">
+    <div className="bg-[#faf9f5] min-h-screen pt-20 pb-16">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200/60 py-16">
+      <div className="bg-white border-b border-gray-200/60 py-10 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-4">
+          <div className="max-w-3xl space-y-3">
             <div className="inline-flex items-center space-x-2 text-xs font-bold tracking-widest text-accent-blue uppercase bg-blue-50 px-3 py-1 rounded-md border border-blue-100">
               <Briefcase className="w-3.5 h-3.5 text-accent-blue" />
               <span>Career Trajectory</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-navy-950">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-navy-950">
               Professional Experience
             </h1>
-            <p className="text-lg text-gray-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
               A comprehensive chronicle of marketing, communication, content operations, and journalistic reporting experience.
             </p>
           </div>
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 space-y-6 sm:space-y-8">
         {experience.map((item) => (
           <div
             key={item.id}

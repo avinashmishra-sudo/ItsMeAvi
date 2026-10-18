@@ -18,20 +18,20 @@ export default async function YouTubePage() {
   const channelHandle = settings?.youtube_channel_handle || "TheEyesChicko";
 
   return (
-    <div className="bg-slate-50 min-h-screen pt-28 pb-20">
+    <div className="bg-slate-50 min-h-screen pt-20 pb-16">
       {/* Header */}
-      <div className="bg-navy-950 text-white py-16 border-b border-navy-800">
+      <div className="bg-navy-950 text-white py-10 sm:py-12 border-b border-navy-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="max-w-3xl space-y-4">
+            <div className="max-w-3xl space-y-3">
               <div className="inline-flex items-center space-x-2 text-xs font-bold tracking-widest text-gold-400 uppercase bg-navy-900 px-3 py-1 rounded-md border border-gold-500/30">
                 <Youtube className="w-4 h-4 text-red-500" />
                 <span>Creative Media &amp; Content</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
                 YouTube Video Channel
               </h1>
-              <p className="text-lg text-gray-300 leading-relaxed font-normal">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal">
                 Video tutorials, creative storytelling breakdowns, and instructional media projects published to @{channelHandle}.
               </p>
             </div>
@@ -49,7 +49,7 @@ export default async function YouTubePage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {videos.map((video) => (
             <div

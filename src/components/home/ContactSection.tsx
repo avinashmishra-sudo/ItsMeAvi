@@ -5,9 +5,9 @@ export default function ContactSection() {
   const { contact } = portfolioData;
 
   return (
-    <section id="contact" className="py-24 bg-[#faf9f5]">
+    <section id="contact" className="py-14 sm:py-16 md:py-20 bg-[#faf9f5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-navy-950 text-white rounded-3xl p-8 sm:p-12 lg:p-16 border border-navy-800 shadow-lg space-y-10 relative overflow-hidden">
+        <div className="bg-navy-950 text-white rounded-3xl p-8 sm:p-12 lg:p-14 border border-navy-800 shadow-lg space-y-8 sm:space-y-10 relative overflow-hidden">
           {/* Subtle background glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-accent-blue/10 rounded-full blur-3xl pointer-events-none" />
 

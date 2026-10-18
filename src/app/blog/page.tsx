@@ -20,26 +20,26 @@ export default async function BlogIndexPage() {
   const regularPosts = posts.filter((p) => p.id !== featuredPost?.id);
 
   return (
-    <div className="bg-[#faf9f5] min-h-screen pt-28 pb-20">
+    <div className="bg-[#faf9f5] min-h-screen pt-20 pb-16">
       {/* Editorial Header */}
-      <div className="bg-white border-b border-gray-200/60 py-16 sm:py-20">
+      <div className="bg-white border-b border-gray-200/60 py-10 sm:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-4">
+          <div className="max-w-3xl space-y-3">
             <div className="inline-flex items-center space-x-2 text-xs font-bold tracking-widest text-accent-blue uppercase bg-blue-50 px-3 py-1 rounded-md border border-blue-100">
               <Sparkles className="w-3.5 h-3.5 text-accent-blue" />
               <span>Articles &amp; Field Notes</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-navy-950">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-navy-950">
               Thoughts on Strategy, Creativity &amp; Execution
             </h1>
-            <p className="text-lg text-gray-600 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
               Practical perspectives on content marketing, digital learning architecture, AI-accelerated workflows, and cross-functional leadership based on 10+ years of hands-on practice.
             </p>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 space-y-10 sm:space-y-12">
         {/* Featured Post Card */}
         {featuredPost && (
           <div className="relative bg-white rounded-3xl border border-gray-200/80 p-8 sm:p-12 shadow-xs overflow-hidden group hover:border-gold-500/40 transition-all">

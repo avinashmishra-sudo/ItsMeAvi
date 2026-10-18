@@ -12,8 +12,8 @@ export default function IndustryExperienceSection() {
   const { industries } = portfolioData;
 
   return (
-    <section className="py-20 bg-white border-b border-gray-200/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <section className="py-12 sm:py-14 md:py-16 bg-white border-b border-gray-200/60">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         <div className="max-w-3xl space-y-2">
           <div className="inline-flex items-center space-x-2 text-xs font-bold tracking-widest text-accent-blue uppercase bg-blue-50 px-3 py-1 rounded-md border border-blue-100">
             <Building2 className="w-3.5 h-3.5 text-accent-blue" />
@@ -22,24 +22,24 @@ export default function IndustryExperienceSection() {
           <h2 className="text-3xl sm:text-4xl font-bold text-navy-950 tracking-tight">
             Industry Experience
           </h2>
-          <p className="text-base text-gray-600 font-normal">
+          <p className="text-sm sm:text-base text-gray-600 font-normal">
             Practical contributions across enterprise domains, digital commerce, and broadcast environments.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {industries.map((ind, idx) => {
             const Icon = industryIcons[ind.icon] || Building2;
 
             return (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-stone-50 border border-stone-200/80 hover:border-gray-300 transition-all space-y-3"
+                className="p-5 sm:p-6 rounded-2xl bg-stone-50 border border-stone-200/80 hover:border-accent-blue/40 hover:shadow-xs transition-all space-y-3"
               >
                 <div className="w-10 h-10 rounded-xl bg-white border border-stone-200 flex items-center justify-center text-navy-950">
                   <Icon className="w-5 h-5 text-accent-blue" />
                 </div>
-                <h3 className="text-lg font-bold text-navy-950">{ind.name}</h3>
+                <h3 className="text-base sm:text-lg font-bold text-navy-950">{ind.name}</h3>
                 <p className="text-xs text-gray-600 leading-relaxed">{ind.description}</p>
               </div>
             );

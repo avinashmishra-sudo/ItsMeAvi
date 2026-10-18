@@ -5,10 +5,10 @@ export default function ExperienceSection() {
   const { experience } = portfolioData;
 
   return (
-    <section id="experience" className="py-24 bg-white border-b border-gray-200/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <section id="experience" className="py-14 sm:py-16 md:py-20 bg-white border-b border-gray-200/60">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         {/* Section Header */}
-        <div className="max-w-3xl space-y-3">
+        <div className="max-w-3xl space-y-2.5">
           <div className="inline-flex items-center space-x-2 text-xs font-bold tracking-widest text-accent-blue uppercase bg-blue-50 px-3 py-1 rounded-md border border-blue-100">
             <Briefcase className="w-3.5 h-3.5 text-accent-blue" />
             <span>Career History</span>
@@ -16,17 +16,17 @@ export default function ExperienceSection() {
           <h2 className="text-3xl sm:text-4xl font-bold text-navy-950 tracking-tight">
             10+ Years Professional Experience
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 font-normal">
+          <p className="text-sm sm:text-base text-gray-600 font-normal">
             A track record of contributions across enterprise BFSI marketing, broadcast media operations, investigative journalism, and e-commerce content.
           </p>
         </div>
 
         {/* Timeline Items */}
-        <div className="space-y-10">
+        <div className="space-y-6 sm:space-y-7">
           {experience.map((item, idx) => (
             <div
               key={item.id}
-              className="p-8 sm:p-10 rounded-3xl bg-stone-50 border border-stone-200/80 hover:border-gray-300 transition-all space-y-6 relative overflow-hidden"
+              className="p-6 sm:p-8 rounded-3xl bg-stone-50 border border-stone-200/80 hover:border-gray-300 transition-all space-y-5 relative overflow-hidden"
             >
               {item.isCurrent && (
                 <div className="absolute top-0 right-0 bg-navy-950 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">
