@@ -13,6 +13,7 @@ TRUNCATE TABLE public.experiences CASCADE;
 TRUNCATE TABLE public.profile CASCADE;
 TRUNCATE TABLE public.site_settings CASCADE;
 TRUNCATE TABLE public.content_sections CASCADE;
+TRUNCATE TABLE public.blog_posts CASCADE;
 
 -- 1. Site Settings
 INSERT INTO public.site_settings (
