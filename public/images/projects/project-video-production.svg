@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070b14" />
+      <stop offset="100%" stop-color="#0b1120" />
+    </linearGradient>
+    <linearGradient id="goldGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2e4b8" />
+      <stop offset="100%" stop-color="#c59b27" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bgGrad4)" />
+
+  <!-- Video Timeline Workspace Mockup -->
+  <rect x="90" y="60" width="620" height="380" rx="14" fill="#0f172a" stroke="#1e293b" stroke-width="2" />
+  
+  <!-- Video Monitor / Player Preview -->
+  <rect x="120" y="85" width="340" height="200" rx="8" fill="#000000" stroke="#334155" stroke-width="1" />
+  <!-- Big Play Button in center -->
+  <circle cx="290" cy="185" r="32" fill="#c59b27" opacity="0.9" />
+  <polygon points="282,170 306,185 282,200" fill="#070b14" />
+  <rect x="135" y="255" width="80" height="18" rx="4" fill="#000000" opacity="0.7" />
+  <text x="145" y="268" fill="#f8fafc" font-family="monospace" font-size="11">04:18 / 12:45</text>
+
+  <!-- Audio Waveform / Right Inspector Panel -->
+  <rect x="480" y="85" width="200" height="200" rx="8" fill="#070b14" stroke="#1e293b" stroke-width="1" />
+  <text x="500" y="115" fill="#e9cf8b" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">COLOR & AUDIO GAIN</text>
+  <rect x="500" y="135" width="160" height="6" rx="3" fill="#1e293b" />
+  <rect x="500" y="135" width="110" height="6" rx="3" fill="#c59b27" />
+  <rect x="500" y="160" width="160" height="6" rx="3" fill="#1e293b" />
+  <rect x="500" y="160" width="135" height="6" rx="3" fill="#3b82f6" />
+  <rect x="500" y="185" width="160" height="6" rx="3" fill="#1e293b" />
+  <rect x="500" y="185" width="85" height="6" rx="3" fill="#10b981" />
+
+  <!-- Multi-track Timeline at bottom -->
+  <rect x="120" y="305" width="560" height="110" rx="8" fill="#080e1a" stroke="#1e293b" stroke-width="1" />
+  
+  <!-- Video Track 1 -->
+  <rect x="135" y="320" width="180" height="24" rx="4" fill="#1e3a8a" opacity="0.8" stroke="#3b82f6" stroke-width="1" />
+  <text x="145" y="336" fill="#93c5fd" font-family="system-ui, sans-serif" font-size="11">Video Track: A-Roll</text>
+
+  <rect x="325" y="320" width="200" height="24" rx="4" fill="#1e3a8a" opacity="0.8" stroke="#3b82f6" stroke-width="1" />
+  <text x="335" y="336" fill="#93c5fd" font-family="system-ui, sans-serif" font-size="11">B-Roll: Motion Titles</text>
+
+  <!-- Audio Track 2 -->
+  <rect x="135" y="355" width="390" height="20" rx="4" fill="#065f46" opacity="0.8" stroke="#10b981" stroke-width="1" />
+  <text x="145" y="369" fill="#a7f3d0" font-family="system-ui, sans-serif" font-size="10">Voiceover Studio Track (Cleaned)</text>
+
+  <!-- Music Track 3 -->
+  <rect x="135" y="382" width="520" height="18" rx="4" fill="#713f12" opacity="0.8" stroke="#c59b27" stroke-width="1" />
+  <text x="145" y="395" fill="#fde68a" font-family="system-ui, sans-serif" font-size="9">Soundtrack & Ambience Bed</text>
+
+  <!-- Playhead Red Line -->
+  <line x1="300" y1="305" x2="300" y2="415" stroke="#ef4444" stroke-width="2" />
+  <polygon points="295,305 305,305 300,313" fill="#ef4444" />
+</svg>
