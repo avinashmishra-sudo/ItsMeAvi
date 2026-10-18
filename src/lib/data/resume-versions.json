@@ -1,0 +1,24 @@
+[
+  {
+    "id": "res-1792335051471",
+    "version_label": "Avinash Mishra — Updated Resume",
+    "description": "Updated resume uploaded via Admin Panel",
+    "file_url": "/resumes/1792335051471_Avinash_Mishra_Resume_O.pdf",
+    "file_name": "Avinash_Mishra_Resume_O.pdf",
+    "file_size_bytes": 140876,
+    "is_published": true,
+    "published_at": "2026-10-18T14:50:51.000Z",
+    "created_at": "2026-10-18T14:50:51.000Z"
+  },
+  {
+    "id": "f0000000-0000-0000-0000-000000000001",
+    "version_label": "Avinash Mishra — Master Resume Draft (10+ Years)",
+    "description": "Master resume draft highlighting 10+ years multidisciplinary experience across marketing, communication, content, creative production, and digital learning.",
+    "file_url": "/resumes/Avinash_Mishra_Resume.pdf",
+    "file_name": "Avinash_Mishra_Resume.pdf",
+    "file_size_bytes": 272019,
+    "is_published": false,
+    "published_at": null,
+    "created_at": "2026-10-18T00:00:00Z"
+  }
+]

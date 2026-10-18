@@ -247,11 +247,31 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
   }
 }
 
+import fs from "fs";
+import path from "path";
+
+function getLocalResumeVersions(): ResumeVersion[] {
+  try {
+    const filePath = path.join(process.cwd(), "src", "lib", "data", "resume-versions.json");
+    if (fs.existsSync(filePath)) {
+      const content = fs.readFileSync(filePath, "utf-8");
+      const parsed = JSON.parse(content);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed as ResumeVersion[];
+      }
+    }
+  } catch (err) {
+    console.error("Error reading local resume-versions.json", err);
+  }
+  return initialResumeVersions;
+}
+
 export async function getPublishedResume(): Promise<ResumeVersion | null> {
   try {
     const supabase = await createServerSupabaseClient();
     if (!supabase) {
-      return initialResumeVersions.find((r) => r.is_published) || null;
+      const versions = getLocalResumeVersions();
+      return versions.find((r) => r.is_published) || versions[0] || null;
     }
 
     const { data, error } = await supabase
@@ -263,18 +283,20 @@ export async function getPublishedResume(): Promise<ResumeVersion | null> {
       .maybeSingle();
 
     if (error || !data) {
-      return initialResumeVersions.find((r) => r.is_published) || null;
+      const versions = getLocalResumeVersions();
+      return versions.find((r) => r.is_published) || versions[0] || null;
     }
     return data as ResumeVersion;
   } catch {
-    return initialResumeVersions.find((r) => r.is_published) || null;
+    const versions = getLocalResumeVersions();
+    return versions.find((r) => r.is_published) || versions[0] || null;
   }
 }
 
 export async function getAllResumeVersions(): Promise<ResumeVersion[]> {
   try {
     const supabase = await createServerSupabaseClient();
-    if (!supabase) return initialResumeVersions;
+    if (!supabase) return getLocalResumeVersions();
 
     const { data, error } = await supabase
       .from("resume_versions")
@@ -282,10 +304,10 @@ export async function getAllResumeVersions(): Promise<ResumeVersion[]> {
       .order("is_published", { ascending: false })
       .order("created_at", { ascending: false });
 
-    if (error || !data) return initialResumeVersions;
+    if (error || !data || data.length === 0) return getLocalResumeVersions();
     return data as ResumeVersion[];
   } catch {
-    return initialResumeVersions;
+    return getLocalResumeVersions();
   }
 }
 

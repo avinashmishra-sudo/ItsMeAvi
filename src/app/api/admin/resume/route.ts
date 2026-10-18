@@ -2,10 +2,55 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAuthenticatedUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getAllResumeVersions } from "@/lib/data";
+import { ResumeVersion } from "@/types";
+import { initialResumeVersions } from "@/lib/data/initial-data";
 import fs from "fs";
 import path from "path";
 
 export const dynamic = "force-dynamic";
+
+function getLocalResumeVersions(): ResumeVersion[] {
+  try {
+    const filePath = path.join(process.cwd(), "src", "lib", "data", "resume-versions.json");
+    if (fs.existsSync(filePath)) {
+      const content = fs.readFileSync(filePath, "utf-8");
+      const parsed = JSON.parse(content);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed as ResumeVersion[];
+      }
+    }
+  } catch (err) {
+    console.error("Error reading resume-versions.json:", err);
+  }
+  return initialResumeVersions;
+}
+
+function saveLocalResumeVersions(versions: ResumeVersion[]) {
+  try {
+    const filePath = path.join(process.cwd(), "src", "lib", "data", "resume-versions.json");
+    fs.writeFileSync(filePath, JSON.stringify(versions, null, 2), "utf-8");
+  } catch (err) {
+    console.error("Error saving resume-versions.json:", err);
+  }
+}
+
+function syncActiveResumeToPublicPdf(fileBufferOrPath: Buffer | string) {
+  try {
+    const publicResumePath = path.join(process.cwd(), "public", "resume.pdf");
+    if (Buffer.isBuffer(fileBufferOrPath)) {
+      fs.writeFileSync(publicResumePath, fileBufferOrPath);
+    } else {
+      // It's a local path like /resumes/filename.pdf
+      const cleanPath = fileBufferOrPath.replace(/^\//, "");
+      const sourceFile = path.join(process.cwd(), "public", cleanPath);
+      if (fs.existsSync(sourceFile)) {
+        fs.copyFileSync(sourceFile, publicResumePath);
+      }
+    }
+  } catch (err) {
+    console.error("Error syncing active resume to public/resume.pdf:", err);
+  }
+}
 
 export async function GET() {
   const user = await getAuthenticatedUser();
@@ -61,7 +106,20 @@ export async function POST(request: NextRequest) {
     const cleanFilename = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
     let fileUrl = `/resumes/${cleanFilename}`;
 
+    // Always ensure local file is written so public direct downloads work instantly
+    const uploadsDir = path.join(process.cwd(), "public", "resumes");
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+    fs.writeFileSync(path.join(uploadsDir, cleanFilename), buffer);
+
+    // If publishing immediately, update public/resume.pdf immediately
+    if (publishImmediately) {
+      syncActiveResumeToPublicPdf(buffer);
+    }
+
     const adminClient = createAdminClient();
+    const now = new Date().toISOString();
 
     // 3. Upload to Supabase Storage if available
     if (adminClient) {
@@ -78,28 +136,10 @@ export async function POST(request: NextRequest) {
           .getPublicUrl(cleanFilename);
         fileUrl = publicUrlData.publicUrl;
       } else {
-        console.warn("Supabase Storage upload note:", uploadError?.message);
-        // Fallback to local public file if bucket is not created
-        const uploadsDir = path.join(process.cwd(), "public", "resumes");
-        if (!fs.existsSync(uploadsDir)) {
-          fs.mkdirSync(uploadsDir, { recursive: true });
-        }
-        fs.writeFileSync(path.join(uploadsDir, cleanFilename), buffer);
-        fileUrl = `/resumes/${cleanFilename}`;
+        console.warn("Supabase Storage note:", uploadError?.message);
       }
-    } else {
-      // Local development without Supabase client
-      const uploadsDir = path.join(process.cwd(), "public", "resumes");
-      if (!fs.existsSync(uploadsDir)) {
-        fs.mkdirSync(uploadsDir, { recursive: true });
-      }
-      fs.writeFileSync(path.join(uploadsDir, cleanFilename), buffer);
-      fileUrl = `/resumes/${cleanFilename}`;
-    }
 
-    // 4. If publishing immediately, unpublish any existing version first
-    const now = new Date().toISOString();
-    if (adminClient) {
+      // If publishing immediately, unpublish existing versions in Supabase
       if (publishImmediately) {
         await adminClient
           .from("resume_versions")
@@ -107,32 +147,7 @@ export async function POST(request: NextRequest) {
           .eq("is_published", true);
       }
 
-      const { data, error } = await adminClient
-        .from("resume_versions")
-        .insert({
-          version_label: versionLabel.trim(),
-          description: description.trim(),
-          file_url: fileUrl,
-          file_name: file.name,
-          file_size_bytes: file.size,
-          is_published: publishImmediately,
-          published_at: publishImmediately ? now : null,
-        })
-        .select()
-        .single();
-
-      if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
-      }
-
-      return NextResponse.json({ success: true, resume: data });
-    }
-
-    return NextResponse.json({
-      success: true,
-      message: "Resume uploaded in demo mode.",
-      resume: {
-        id: "res-" + Date.now(),
+      await adminClient.from("resume_versions").insert({
         version_label: versionLabel.trim(),
         description: description.trim(),
         file_url: fileUrl,
@@ -140,8 +155,38 @@ export async function POST(request: NextRequest) {
         file_size_bytes: file.size,
         is_published: publishImmediately,
         published_at: publishImmediately ? now : null,
-        created_at: now,
-      },
+      });
+    }
+
+    // 4. Update local resume-versions.json
+    const localVersions = getLocalResumeVersions();
+    if (publishImmediately) {
+      localVersions.forEach((v) => {
+        v.is_published = false;
+      });
+    }
+
+    const newResume: ResumeVersion = {
+      id: "res-" + Date.now(),
+      version_label: versionLabel.trim(),
+      description: description.trim(),
+      file_url: fileUrl,
+      file_name: file.name,
+      file_size_bytes: file.size,
+      is_published: publishImmediately,
+      published_at: publishImmediately ? now : null,
+      created_at: now,
+    };
+
+    localVersions.unshift(newResume);
+    saveLocalResumeVersions(localVersions);
+
+    return NextResponse.json({
+      success: true,
+      message: publishImmediately
+        ? "Resume uploaded and published successfully."
+        : "Resume uploaded successfully as draft.",
+      resume: newResume,
     });
   } catch (error: any) {
     return NextResponse.json({ error: error?.message || "Failed to upload resume" }, { status: 500 });
@@ -164,69 +209,88 @@ export async function PUT(request: NextRequest) {
 
     const adminClient = createAdminClient();
     const now = new Date().toISOString();
-
-    if (!adminClient) {
-      return NextResponse.json({ success: true, message: "Resume updated (Demo mode)." });
-    }
+    const localVersions = getLocalResumeVersions();
+    const targetResume = localVersions.find((r) => r.id === id);
 
     if (action === "publish") {
-      // 1. Unpublish any existing published resume
-      await adminClient
-        .from("resume_versions")
-        .update({ is_published: false })
-        .eq("is_published", true);
+      // 1. Update in local manifest
+      localVersions.forEach((r) => {
+        if (r.id === id) {
+          r.is_published = true;
+          r.published_at = now;
+          r.updated_at = now;
+        } else {
+          r.is_published = false;
+        }
+      });
+      saveLocalResumeVersions(localVersions);
 
-      // 2. Publish this version
-      const { data, error } = await adminClient
-        .from("resume_versions")
-        .update({
-          is_published: true,
-          published_at: now,
-          updated_at: now,
-        })
-        .eq("id", id)
-        .select()
-        .single();
-
-      if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+      // 2. Sync to public/resume.pdf
+      if (targetResume) {
+        syncActiveResumeToPublicPdf(targetResume.file_url);
       }
 
-      return NextResponse.json({ success: true, resume: data });
+      // 3. Supabase update if connected
+      if (adminClient) {
+        await adminClient
+          .from("resume_versions")
+          .update({ is_published: false })
+          .eq("is_published", true);
+
+        await adminClient
+          .from("resume_versions")
+          .update({
+            is_published: true,
+            published_at: now,
+            updated_at: now,
+          })
+          .eq("id", id);
+      }
+
+      return NextResponse.json({ success: true, message: "Resume published successfully." });
     } else if (action === "unpublish") {
-      const { data, error } = await adminClient
-        .from("resume_versions")
-        .update({
-          is_published: false,
-          updated_at: now,
-        })
-        .eq("id", id)
-        .select()
-        .single();
+      localVersions.forEach((r) => {
+        if (r.id === id) {
+          r.is_published = false;
+          r.updated_at = now;
+        }
+      });
+      saveLocalResumeVersions(localVersions);
 
-      if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+      if (adminClient) {
+        await adminClient
+          .from("resume_versions")
+          .update({
+            is_published: false,
+            updated_at: now,
+          })
+          .eq("id", id);
       }
 
-      return NextResponse.json({ success: true, resume: data });
+      return NextResponse.json({ success: true, message: "Resume unpublished." });
     } else {
-      // General update (version_label / description)
-      const { data, error } = await adminClient
-        .from("resume_versions")
-        .update({
-          version_label,
-          description,
-          updated_at: now,
-        })
-        .eq("id", id)
-        .select()
-        .single();
+      // Edit metadata
+      localVersions.forEach((r) => {
+        if (r.id === id) {
+          if (version_label !== undefined) r.version_label = version_label;
+          if (description !== undefined) r.description = description;
+          r.updated_at = now;
+        }
+      });
+      saveLocalResumeVersions(localVersions);
 
-      if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+      if (adminClient) {
+        await adminClient
+          .from("resume_versions")
+          .update({
+            version_label,
+            description,
+            updated_at: now,
+          })
+          .eq("id", id);
       }
 
-      return NextResponse.json({ success: true, resume: data });
+      return NextResponse.json({ success: true, message: "Resume updated." });
     }
   } catch (error: any) {
     return NextResponse.json({ error: error?.message || "Failed to update resume" }, { status: 500 });
@@ -247,19 +311,10 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "Resume ID is required." }, { status: 400 });
     }
 
-    const adminClient = createAdminClient();
-    if (!adminClient) {
-      return NextResponse.json({ success: true, message: "Resume deleted (Demo mode)." });
-    }
+    const localVersions = getLocalResumeVersions();
+    const resumeToDelete = localVersions.find((r) => r.id === id);
 
-    // Check if it is currently published
-    const { data: resume } = await adminClient
-      .from("resume_versions")
-      .select("is_published, file_url")
-      .eq("id", id)
-      .single();
-
-    if (resume?.is_published) {
+    if (resumeToDelete?.is_published) {
       return NextResponse.json(
         {
           error:
@@ -269,12 +324,29 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    const { error } = await adminClient.from("resume_versions").delete().eq("id", id);
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    // Remove from local manifest
+    const updatedVersions = localVersions.filter((r) => r.id !== id);
+    saveLocalResumeVersions(updatedVersions);
+
+    // Remove local file if it exists
+    if (resumeToDelete && resumeToDelete.file_url.startsWith("/resumes/")) {
+      const filePath = path.join(process.cwd(), "public", resumeToDelete.file_url.replace(/^\//, ""));
+      if (fs.existsSync(filePath)) {
+        try {
+          fs.unlinkSync(filePath);
+        } catch (e) {
+          console.warn("Could not delete file:", filePath, e);
+        }
+      }
     }
 
-    return NextResponse.json({ success: true });
+    // Supabase DB delete if connected
+    const adminClient = createAdminClient();
+    if (adminClient) {
+      await adminClient.from("resume_versions").delete().eq("id", id);
+    }
+
+    return NextResponse.json({ success: true, message: "Resume version removed." });
   } catch (error: any) {
     return NextResponse.json({ error: error?.message || "Failed to delete resume" }, { status: 500 });
   }
