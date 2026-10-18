@@ -19,6 +19,7 @@ import {
   YouTubeVideo,
   DashboardStats,
   ContactSubmission,
+  BlogPost,
 } from "@/types";
 
 // =============================================================================
@@ -468,3 +469,72 @@ export async function getContactSubmissions(): Promise<ContactSubmission[]> {
     return [];
   }
 }
+
+export function getLocalBlogPosts(): BlogPost[] {
+  try {
+    const filePath = path.join(process.cwd(), "src", "lib", "data", "blog-posts.json");
+    if (fs.existsSync(filePath)) {
+      const content = fs.readFileSync(filePath, "utf-8");
+      return JSON.parse(content) as BlogPost[];
+    }
+  } catch (err) {
+    console.error("Error reading blog-posts.json:", err);
+  }
+  return [];
+}
+
+export async function getBlogPosts(onlyPublished = true): Promise<BlogPost[]> {
+  try {
+    const supabase = await createServerSupabaseClient();
+    if (!supabase) {
+      const posts = getLocalBlogPosts();
+      return onlyPublished ? posts.filter((p) => p.is_published) : posts;
+    }
+
+    let query = supabase
+      .from("blog_posts")
+      .select("*")
+      .order("published_at", { ascending: false });
+
+    if (onlyPublished) {
+      query = query.eq("is_published", true);
+    }
+
+    const { data, error } = await query;
+    if (error || !data || data.length === 0) {
+      const posts = getLocalBlogPosts();
+      return onlyPublished ? posts.filter((p) => p.is_published) : posts;
+    }
+    return data as BlogPost[];
+  } catch {
+    const posts = getLocalBlogPosts();
+    return onlyPublished ? posts.filter((p) => p.is_published) : posts;
+  }
+}
+
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  try {
+    const supabase = await createServerSupabaseClient();
+    if (!supabase) {
+      const posts = getLocalBlogPosts();
+      return posts.find((p) => p.slug === slug && p.is_published) || null;
+    }
+
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("*")
+      .eq("slug", slug)
+      .eq("is_published", true)
+      .maybeSingle();
+
+    if (error || !data) {
+      const posts = getLocalBlogPosts();
+      return posts.find((p) => p.slug === slug && p.is_published) || null;
+    }
+    return data as BlogPost;
+  } catch {
+    const posts = getLocalBlogPosts();
+    return posts.find((p) => p.slug === slug && p.is_published) || null;
+  }
+}
+

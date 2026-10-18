@@ -15,6 +15,7 @@ import {
   LogOut,
   ExternalLink,
   ShieldCheck,
+  BookOpen,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -24,6 +25,7 @@ const adminNav = [
   { name: "Experience", href: "/admin/experience", icon: Briefcase },
   { name: "Skills & Tools", href: "/admin/skills", icon: Wrench },
   { name: "Projects", href: "/admin/projects", icon: FolderGit2 },
+  { name: "Blog & Articles", href: "/admin/blog", icon: BookOpen },
   { name: "Resume Versions", href: "/admin/resume", icon: FileText },
   { name: "YouTube Videos", href: "/admin/videos", icon: Youtube },
   { name: "Site Settings", href: "/admin/settings", icon: Settings },

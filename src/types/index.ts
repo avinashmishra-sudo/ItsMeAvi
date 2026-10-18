@@ -152,4 +152,26 @@ export interface DashboardStats {
   totalVideos: number;
   lastVideoSync: string | null;
   unreadInquiries: number;
+  totalBlogPosts?: number;
 }
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  summary: string;
+  content: string;
+  category: string;
+  tags: string[];
+  reading_time_minutes: number;
+  published_at: string;
+  is_published: boolean;
+  is_featured?: boolean;
+  cover_image?: string | null;
+  author?: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+}
+

@@ -1,15 +1,19 @@
 import { MetadataRoute } from "next";
-import { getProjects } from "@/lib/data";
+import { getProjects, getBlogPosts } from "@/lib/data";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://avinashmishra.dev";
-  const projects = await getProjects(false);
+  const [projects, posts] = await Promise.all([
+    getProjects(false),
+    getBlogPosts(true),
+  ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/about",
     "/experience",
     "/projects",
+    "/blog",
     "/youtube",
     "/resume",
     "/contact",
@@ -27,5 +31,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...projectRoutes];
+  const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${siteUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.published_at),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...projectRoutes, ...blogRoutes];
 }
+
