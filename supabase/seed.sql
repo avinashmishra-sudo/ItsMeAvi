@@ -381,3 +381,127 @@ INSERT INTO public.content_sections (id, section_key, title, subtitle, content, 
 ('20000000-0000-0000-0000-000000000006', 'youtube', 'Latest From YouTube', 'Creative Videos, Production Insights & Discussions', 'Watch recent videos, tutorials, and content from my official YouTube channel @TheEyesChicko.', TRUE),
 ('20000000-0000-0000-0000-000000000007', 'resume', 'Official Resume', 'Verified Qualifications, Experience & Toolsets', 'View and download my verified professional resume in high-resolution PDF format.', TRUE),
 ('20000000-0000-0000-0000-000000000008', 'contact', 'Get In Touch', 'Let''s Discuss Your Next eLearning or Creative Project', 'Reach out for inquiries, full-time opportunities, or project collaborations.', TRUE);
+
+-- 9. Blog Posts
+INSERT INTO public.blog_posts (
+    id,
+    title,
+    slug,
+    summary,
+    content,
+    category,
+    tags,
+    reading_time_minutes,
+    published_at,
+    is_published,
+    is_featured,
+    cover_image
+) VALUES 
+(
+    'post-1',
+    'Bridging Strategy and Hands-On Execution in Content Marketing',
+    'bridging-strategy-and-hands-on-execution',
+    'Why modern content leaders need to balance high-level narrative strategy with the practical ability to create, edit, and iterate across multimedia formats.',
+    'In many organizations, there exists an artificial wall between strategists who define the narrative and creators who produce the assets. Over my 10+ years working across enterprise BFSI, fast-paced e-commerce, and television production, I have found that the most impactful work happens when that wall is completely dismantled.
+
+### The Problem with Disconnected Strategy
+When strategy is detached from execution, communication plans often look flawless on slide decks but stumble during delivery. Headlines fail to fit real UI layouts, video storyboards require budgets that don''t scale, and digital learning modules become passive slide-turners because the instructional designer wasn''t involved in the early business requirements.
+
+### The Power of Multi-Tool Fluency
+When you understand how Photoshop layers work, how video pacing is constructed in an NLE, and how SEO keyword intent influences content structure, your strategic recommendations are grounded in reality.
+
+1. **Faster Iteration Cycles:** You can prototype an idea in 30 minutes rather than writing a 5-page brief and waiting days for an initial draft.
+2. **Empathetic Leadership:** Working hands-on with creative and technical tools allows you to communicate with designers, developers, and video editors in their own language.
+3. **Practical Resource Allocation:** You know exactly what is feasible within a given timeline and budget.
+
+### Turning Complex Ideas into Engaging Experiences
+Whether you are simplifying enterprise cloud solutions or building interactive compliance training, the core objective remains the same: respect the audience''s time, communicate clarity with empathy, and execute with relentless attention to detail.',
+    'Content & Strategy',
+    ARRAY['Content Marketing', 'Strategy', 'Execution', 'Brand Storytelling'],
+    5,
+    timezone('utc'::text, '2026-10-10T10:00:00Z'),
+    TRUE,
+    TRUE,
+    '/images/projects/project-visual-identity.svg'
+),
+(
+    'post-2',
+    'Designing Engaging E-Learning Experiences: Beyond Slide Turners',
+    'designing-engaging-elearning-experiences',
+    'How to apply narrative pacing, scenario-based branching, and interactive multimedia in Articulate Storyline and Rise 360 to keep adult learners genuinely engaged.',
+    'Traditional corporate e-learning has a reputation problem. Too often, modules are built as digital page-turners—static text pasted onto slides with a ''Next'' button at the bottom and a multiple-choice quiz at the end.
+
+Adult learners don''t retain information through passive observation; they learn by making decisions and seeing the consequences.
+
+### 1. Scenario-Based Branching Over Wall-of-Text
+Instead of listing 10 compliance rules on a single slide, put the learner in the seat of a project manager facing an urgent deadline. Give them three plausible actions, each leading to realistic business outcomes. In Articulate Storyline, states, variables, and triggers make it possible to build these decision trees with zero code.
+
+### 2. Micro-Interactions that Serve Pedagogy, Not Gimmicks
+Click-and-reveals, drag-and-drops, and software simulations are effective only when they reflect real-world cognitive tasks. If a learner is expected to use a CRM or banking system, build a guided simulation where they physically click the buttons and enter data.
+
+### 3. Pacing and Visual Rhythm
+Borrow techniques from video production and editorial journalism. Vary the length of sections, introduce short video recaps, and use clean whitespace so the learner''s cognitive load is focused on the core concept rather than navigating a cluttered interface.',
+    'Digital Learning',
+    ARRAY['Instructional Design', 'Articulate 360', 'Rise 360', 'E-Learning'],
+    6,
+    timezone('utc'::text, '2026-10-04T09:30:00Z'),
+    TRUE,
+    FALSE,
+    '/images/projects/project-bfsi-course.svg'
+),
+(
+    'post-3',
+    'Leveraging AI in Modern Digital Creation: A Practical Workflow',
+    'leveraging-ai-in-modern-digital-creation',
+    'Moving past generic prompt generation: how self-directed professionals can integrate AI into ideation, content structuring, and rapid prototyping without sacrificing editorial quality.',
+    'There is a massive difference between generating generic AI text and using AI as an intelligent acceleration layer in a creative workflow.
+
+Over the past year, I have explored how AI tools can compress the gap between concept and working prototype—from scaffolding web applications to drafting structured curriculum outlines.
+
+### The Three-Phase AI Workflow
+
+1. **Phase 1: Exploratory Scaffolding**
+Use AI to brainstorm angles, challenge initial assumptions, and generate comprehensive component outlines. In this phase, the AI acts as an autonomous thought partner that surfaces blind spots.
+
+2. **Phase 2: Editorial Synthesis & Domain Rigor**
+This is where human experience is irreplaceable. AI cannot know your brand voice, your compliance nuances, or the emotional pulse of your audience. Every generated structure must be curated, fact-checked, and rewritten with domain expertise.
+
+3. **Phase 3: Rapid Functional Prototyping**
+By combining AI coding assistants with modern frameworks (like Next.js and Tailwind CSS), non-engineers with computer application fundamentals can spin up working web apps, interactive calculators, or custom landing pages in days instead of months.
+
+AI doesn''t replace the need for critical thinking; it magnifies the output of those who already know what good work looks like.',
+    'AI & Innovation',
+    ARRAY['AI Workflows', 'Web Prototyping', 'Productivity', 'Digital Creation'],
+    4,
+    timezone('utc'::text, '2026-09-28T14:15:00Z'),
+    TRUE,
+    FALSE,
+    '/images/projects/project-software-sim.svg'
+),
+(
+    'post-4',
+    'The Discipline of Continuous Learning: Adapting Across Media and Technology',
+    'discipline-of-continuous-learning',
+    'Reflections from 10+ years across newsrooms, devotional TV post-production, e-commerce, and enterprise communications on the habits that make cross-disciplinary contribution possible.',
+    'Early in my career working in a devotional television production facility, technical support was not always available when deadlines loomed. If a broadcast router glitched or a video switch failed to route signals properly, waiting for outside help meant missed airtime. Learning basic router setup and IP management on the spot wasn''t in my job description—it was simply what was needed to keep the broadcast running.
+
+That experience established a pattern that has defined my entire career: **when a problem emerges, learn the tools required to solve it.**
+
+### The Myth of the Single-Track Specialist
+While deep specialization has its place, organizations increasingly suffer from functional silos. Marketers don''t understand technology; developers don''t understand brand narratives; designers don''t understand business constraints.
+
+Professionals who cultivate ''T-shaped'' capabilities—deep expertise in communication and storytelling combined with hands-on fluency in digital tools, video, and web technologies—act as natural bridges across teams.
+
+### Three Habits for Lifelong Learning
+
+1. **Learn by Building, Not Just Reading:** Don''t just watch tutorials. Build a real project, launch a test website, or edit a short video.
+2. **De-mystify Technology:** Software and systems are built by humans. With curiosity and patience, any tool can be learned.
+3. **Take Ownership of the Outcome:** When you care about the final deliverable rather than just your narrow task, your willingness to learn expands exponentially.',
+    'Career & Mindset',
+    ARRAY['Self-Directed Learning', 'Career Growth', 'Adaptability', 'Ownership'],
+    5,
+    timezone('utc'::text, '2026-09-15T11:00:00Z'),
+    TRUE,
+    FALSE,
+    '/images/projects/project-video-production.svg'
+);

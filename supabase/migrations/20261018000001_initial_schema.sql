@@ -246,6 +246,35 @@ ON public.contact_submissions FOR INSERT TO public WITH CHECK (true);
 CREATE POLICY "Admin can view and manage contact inquiries" 
 ON public.contact_submissions FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
+-- 10. Blog Posts
+CREATE TABLE IF NOT EXISTS public.blog_posts (
+    id TEXT PRIMARY KEY,
+    title TEXT NOT NULL,
+    slug TEXT NOT NULL UNIQUE,
+    summary TEXT NOT NULL,
+    content TEXT NOT NULL,
+    category TEXT NOT NULL DEFAULT 'Content & Strategy',
+    tags TEXT[] NOT NULL DEFAULT '{}'::TEXT[],
+    reading_time_minutes INTEGER DEFAULT 3,
+    published_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
+    is_published BOOLEAN NOT NULL DEFAULT TRUE,
+    is_featured BOOLEAN NOT NULL DEFAULT FALSE,
+    cover_image TEXT DEFAULT '/images/projects/project-visual-identity.svg',
+    author JSONB DEFAULT '{"name": "Avinash Mishra", "role": "Multidisciplinary Marketing & Communication Professional", "avatar": "/images/profile.jpg"}'::jsonb,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
+);
+
+CREATE INDEX IF NOT EXISTS idx_blog_posts_published_date ON public.blog_posts (is_published, published_at DESC);
+
+ALTER TABLE public.blog_posts ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public can view published blog posts" 
+ON public.blog_posts FOR SELECT TO public USING (is_published = TRUE);
+
+CREATE POLICY "Admin can manage all blog posts" 
+ON public.blog_posts FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
 -- Storage bucket configuration for resumes and project assets
 INSERT INTO storage.buckets (id, name, public) 
 VALUES ('resumes', 'resumes', true)
