@@ -1,168 +1,138 @@
 import Link from "next/link";
-import { Mail, Phone, Linkedin, Youtube, Shield, ArrowUpRight } from "lucide-react";
-import { SiteSettings, Profile } from "@/types";
+import Image from "next/image";
+import { Mail, Linkedin, Youtube, ArrowUpRight, Shield, FileText } from "lucide-react";
+import { portfolioData } from "@/lib/data/portfolio-data";
 
-interface FooterProps {
-  settings?: SiteSettings;
-  profile?: Profile;
-}
-
-export default function Footer({ settings, profile }: FooterProps) {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const email = profile?.email || settings?.contact_email || "avimishra890@gmail.com";
-  const phone = profile?.phone || settings?.contact_phone || "+91-8905056633";
-  const linkedin = settings?.linkedin_url || "https://linkedin.com/in/avinashmishraa";
-  const youtube = settings?.youtube_url || "https://www.youtube.com/@TheEyesChicko";
+  const { meta, contact } = portfolioData;
 
   return (
     <footer className="bg-navy-950 text-gray-300 border-t border-navy-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Brand Info */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-lg bg-navy-900 border border-gold-500/40 flex items-center justify-center text-gold-400 font-bold text-base tracking-wider">
-                AM
-              </div>
-              <div>
-                <span className="text-white font-bold tracking-wide text-base">AVINASH MISHRA</span>
-                <p className="text-xs text-gold-400 font-medium">Senior Graphic Designer & eLearning Specialist</p>
-              </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 items-start">
+          {/* Logo & Headline */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="h-10 w-44 relative flex items-center">
+              <Image
+                src="/images/logo.png"
+                alt="Avinash Mishra Signature Logo"
+                fill
+                className="object-contain object-left mix-blend-screen"
+              />
             </div>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              Specialized in Articulate 360, instructional simulations, BFSI digital learning solutions, and creative multimedia operations.
+            <p className="text-xs text-gold-400 font-semibold uppercase tracking-wider">
+              {meta.eyebrow}
             </p>
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-navy-900 border border-gold-500/20 text-xs text-gold-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Available for senior roles & consultations</span>
-            </div>
+            <p className="text-sm text-gray-400 leading-relaxed max-w-sm font-normal">
+              10+ years across BFSI, e-commerce, television, and digital learning. Connecting strategy, storytelling, creative execution, and technology.
+            </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-xs font-semibold text-gray-200 uppercase tracking-widest mb-4">
-              Explore Portfolio
-            </h3>
-            <ul className="space-y-2.5 text-sm">
+          {/* Quick Navigation Links */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-white">
+              Navigation
+            </h4>
+            <ul className="space-y-2 text-xs font-medium text-gray-400">
               <li>
-                <Link href="/" className="hover:text-gold-400 transition-colors">
+                <Link href="/#home" className="hover:text-white transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-gold-400 transition-colors">
-                  About & Background
+                <Link href="/#about" className="hover:text-white transition-colors">
+                  About
                 </Link>
               </li>
               <li>
-                <Link href="/experience" className="hover:text-gold-400 transition-colors">
-                  Professional Experience
+                <Link href="/#expertise" className="hover:text-white transition-colors">
+                  Expertise
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="hover:text-gold-400 transition-colors">
-                  Featured Projects & Case Studies
+                <Link href="/#experience" className="hover:text-white transition-colors">
+                  Experience
                 </Link>
               </li>
               <li>
-                <Link href="/youtube" className="hover:text-gold-400 transition-colors">
-                  YouTube Video Channel
+                <Link href="/#projects" className="hover:text-white transition-colors">
+                  Projects &amp; Prototypes
                 </Link>
               </li>
               <li>
-                <Link href="/resume" className="hover:text-gold-400 transition-colors">
-                  Resume Overview & Download
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-gold-400 transition-colors">
-                  Contact Me
+                <Link href="/#contact" className="hover:text-white transition-colors">
+                  Contact
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Verified Contact Details */}
-          <div>
-            <h3 className="text-xs font-semibold text-gray-200 uppercase tracking-widest mb-4">
-              Direct Contact
-            </h3>
-            <ul className="space-y-3 text-sm">
+          {/* Connect & Resume */}
+          <div className="lg:col-span-4 space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-white">
+              Connect &amp; Assets
+            </h4>
+            <ul className="space-y-2.5 text-xs text-gray-400">
               <li>
                 <a
-                  href={`mailto:${email}`}
-                  className="flex items-center space-x-2 text-gray-300 hover:text-gold-400 transition-colors group"
+                  href={`mailto:${contact.email}`}
+                  className="flex items-center space-x-2 hover:text-white transition-colors"
                 >
-                  <Mail className="w-4 h-4 text-gold-400 flex-shrink-0" />
-                  <span className="truncate">{email}</span>
+                  <Mail className="w-3.5 h-3.5 text-accent-blue" />
+                  <span>{contact.email}</span>
                 </a>
               </li>
-              {phone && (
-                <li>
-                  <a
-                    href={`tel:${phone}`}
-                    className="flex items-center space-x-2 text-gray-300 hover:text-gold-400 transition-colors"
-                  >
-                    <Phone className="w-4 h-4 text-gold-400 flex-shrink-0" />
-                    <span>{phone}</span>
-                  </a>
-                </li>
-              )}
               <li>
                 <a
-                  href={linkedin}
+                  href={contact.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-2 text-gray-300 hover:text-gold-400 transition-colors"
+                  className="flex items-center space-x-2 hover:text-white transition-colors"
                 >
-                  <Linkedin className="w-4 h-4 text-gold-400 flex-shrink-0" />
+                  <Linkedin className="w-3.5 h-3.5 text-accent-blue" />
                   <span>linkedin.com/in/avinashmishraa</span>
                   <ArrowUpRight className="w-3 h-3 text-gray-500" />
                 </a>
               </li>
               <li>
                 <a
-                  href={youtube}
+                  href={contact.youtubeChannel}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-2 text-gray-300 hover:text-gold-400 transition-colors"
+                  className="flex items-center space-x-2 hover:text-white transition-colors"
                 >
-                  <Youtube className="w-4 h-4 text-gold-400 flex-shrink-0" />
+                  <Youtube className="w-3.5 h-3.5 text-red-500" />
                   <span>@TheEyesChicko</span>
                   <ArrowUpRight className="w-3 h-3 text-gray-500" />
                 </a>
               </li>
             </ul>
-          </div>
 
-          {/* Resume & Verification */}
-          <div>
-            <h3 className="text-xs font-semibold text-gray-200 uppercase tracking-widest mb-4">
-              Verified Credentials
-            </h3>
-            <p className="text-xs text-gray-400 leading-relaxed mb-4">
-              TCS Experience • Sanskruti TV • PG Diploma in Journalism • Bachelor of Computer Applications (BCA).
-            </p>
-            <a
-              href="/api/resume/download"
-              download
-              className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-navy-900 border border-gold-500/40 text-gold-400 hover:bg-gold-500 hover:text-navy-950 font-medium text-xs transition-all duration-200 w-full justify-center"
-            >
-              <span>Download Published Resume (PDF)</span>
-            </a>
+            <div className="pt-2">
+              <a
+                href={contact.resumeUrl}
+                download
+                className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-lg bg-navy-900 border border-gray-700 text-xs font-semibold text-gray-200 hover:text-white hover:border-gold-500/50 transition-colors"
+              >
+                <FileText className="w-3.5 h-3.5 text-gold-400" />
+                <span>Download Resume (PDF)</span>
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-navy-900 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
           <p>© {currentYear} Avinash Mishra. All rights reserved.</p>
+
           <div className="flex items-center space-x-4">
             <Link
               href="/admin/login"
-              className="inline-flex items-center space-x-1 hover:text-gold-400 transition-colors"
+              className="inline-flex items-center space-x-1 text-gray-500 hover:text-gray-300 transition-colors"
             >
               <Shield className="w-3 h-3" />
-              <span>Admin Portal</span>
+              <span>Admin Access</span>
             </Link>
           </div>
         </div>

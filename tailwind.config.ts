@@ -9,6 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        cream: {
+          50: "#fdfdfb",
+          100: "#faf9f5",
+          200: "#f4f3ec",
+          300: "#eceae0",
+        },
+        charcoal: {
+          800: "#1f2937",
+          900: "#111827",
+          950: "#0b0f19",
+        },
         navy: {
           800: "#141c2e",
           900: "#0b1120",
@@ -26,10 +37,14 @@ const config: Config = {
           800: "#6e4e1a",
           900: "#5b4019",
         },
+        accent: {
+          blue: "#2563eb",
+          "blue-hover": "#1d4ed8",
+        },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        serif: ["var(--font-serif)", "Georgia", "serif"],
+        editorial: ["Georgia", "Cambria", "serif"],
       },
     },
   },

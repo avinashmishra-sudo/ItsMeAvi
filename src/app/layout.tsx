@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getSiteSettings, getProfile } from "@/lib/data";
+import { portfolioData } from "@/lib/data/portfolio-data";
 import "./globals.css";
 
 const inter = Inter({
@@ -11,69 +11,72 @@ const inter = Inter({
   display: "swap",
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const settings = await getSiteSettings();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://avinashmishra.dev";
-
-  return {
-    title: {
-      default: settings.site_title,
-      template: `%s | Avinash Mishra`,
-    },
-    description: settings.site_description,
-    keywords: [
-      "Avinash Mishra",
-      "eLearning Developer",
-      "Senior Graphic Designer",
-      "Articulate 360 Specialist",
-      "Articulate Storyline",
-      "Adobe Captivate",
-      "BFSI Learning",
-      "Instructional Design",
-      "Multimedia Production",
+export const metadata: Metadata = {
+  title: {
+    default: portfolioData.meta.title,
+    template: `%s | Avinash Mishra`,
+  },
+  description: portfolioData.meta.description,
+  keywords: [
+    "Avinash Mishra",
+    "Marketing Manager",
+    "Corporate Communications",
+    "Content Strategy",
+    "Digital Learning",
+    "Articulate Storyline",
+    "Creative Production",
+    "BFSI Marketing",
+    "AI-Assisted Digital Creation",
+  ],
+  authors: [{ name: "Avinash Mishra" }],
+  creator: "Avinash Mishra",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://avinashmishra.dev"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: portfolioData.meta.title,
+    description: portfolioData.meta.description,
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://avinashmishra.dev",
+    siteName: "Avinash Mishra Portfolio",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 1023,
+        height: 315,
+        alt: "Avinash Mishra — Multidisciplinary Professional",
+      },
     ],
-    authors: [{ name: "Avinash Mishra" }],
-    creator: "Avinash Mishra",
-    metadataBase: new URL(siteUrl),
-    alternates: {
-      canonical: "/",
-    },
-    openGraph: {
-      title: settings.site_title,
-      description: settings.site_description,
-      url: siteUrl,
-      siteName: "Avinash Mishra Portfolio",
-      locale: "en_US",
-      type: "website",
-    },
-    robots: {
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
       index: true,
       follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
-  };
-}
+  },
+  icons: {
+    icon: "/images/logo.png",
+  },
+};
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const settings = await getSiteSettings();
-  const profile = await getProfile();
-
   return (
     <html lang="en" className={inter.variable}>
-      <body className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-gold-500 selection:text-navy-950 font-sans">
-        <Navbar siteTitle={settings.site_title} />
+      <body className="min-h-screen flex flex-col bg-[#faf9f5] text-charcoal-900 selection:bg-accent-blue selection:text-white font-sans antialiased">
+        <Navbar />
         <main className="flex-grow">{children}</main>
-        <Footer settings={settings} profile={profile} />
+        <Footer />
       </body>
     </html>
   );

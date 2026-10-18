@@ -1,5 +1,5 @@
 async function runTests() {
-  const base = "http://localhost:3001";
+  const base = "http://localhost:3000";
   console.log("=== RUNNING AUTOMATED ROUTE & SECURITY VERIFICATION ===");
 
   const routes = [

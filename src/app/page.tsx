@@ -1,70 +1,42 @@
-import {
-  getProfile,
-  getSiteSettings,
-  getExperiences,
-  getSkills,
-  getProjects,
-  getYouTubeVideos,
-  getPublishedResume,
-} from "@/lib/data";
 import HeroSection from "@/components/home/HeroSection";
-import SummarySection from "@/components/home/SummarySection";
+import AboutSection from "@/components/home/AboutSection";
+import ExpertiseSection from "@/components/home/ExpertiseSection";
 import ExperienceSection from "@/components/home/ExperienceSection";
-import SkillsSection from "@/components/home/SkillsSection";
 import ProjectsSection from "@/components/home/ProjectsSection";
-import YouTubeSection from "@/components/home/YouTubeSection";
-import ResumeSection from "@/components/home/ResumeSection";
+import IndustryExperienceSection from "@/components/home/IndustryExperienceSection";
+import StrengthsSection from "@/components/home/StrengthsSection";
+import EducationSection from "@/components/home/EducationSection";
 import ContactSection from "@/components/home/ContactSection";
 
-export const revalidate = 60; // ISR cache revalidation every minute
-
-export default async function HomePage() {
-  const settings = await getSiteSettings();
-  const [profile, experiences, skills, projects, youtubeVideos, publishedResume] =
-    await Promise.all([
-      getProfile(),
-      getExperiences(true), // only featured on home
-      getSkills(),
-      getProjects(true), // only featured on home
-      getYouTubeVideos(settings?.youtube_display_count || 6),
-      getPublishedResume(),
-    ]);
-
+export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* B. Hero Section */}
-      {settings.show_hero_section && <HeroSection profile={profile} settings={settings} />}
+      {/* 1. Hero Section */}
+      <HeroSection />
 
-      {/* C. Professional Summary */}
-      {settings.show_about_section && <SummarySection profile={profile} />}
+      {/* 2. About Section */}
+      <AboutSection />
 
-      {/* D. Selected Experience */}
-      {settings.show_experience_section && <ExperienceSection experiences={experiences} />}
+      {/* 3. Expertise Section & Skill Groups */}
+      <ExpertiseSection />
 
-      {/* E. Skills and Tools */}
-      {settings.show_skills_section && <SkillsSection skills={skills} />}
+      {/* 4. Professional Experience Timeline */}
+      <ExperienceSection />
 
-      {/* F. Featured Projects */}
-      {settings.show_projects_section && <ProjectsSection projects={projects} />}
+      {/* 5. Selected Projects & Prototypes */}
+      <ProjectsSection />
 
-      {/* G. Latest YouTube Videos */}
-      {settings.show_youtube_section && (
-        <YouTubeSection
-          videos={youtubeVideos}
-          channelHandle={settings.youtube_channel_handle || "TheEyesChicko"}
-        />
-      )}
+      {/* 6. Industry Experience (BFSI, E-comm, Media, TV) */}
+      <IndustryExperienceSection />
 
-      {/* H. Resume Section */}
-      <ResumeSection
-        resume={publishedResume}
-        downloadLabel={settings.resume_download_label || "Download Full Resume (PDF)"}
-      />
+      {/* 7. Professional Strengths ("What I Bring to a Team") */}
+      <StrengthsSection />
 
-      {/* I. Contact Section */}
-      {settings.show_contact_section && (
-        <ContactSection settings={settings} profile={profile} />
-      )}
+      {/* 8. Education */}
+      <EducationSection />
+
+      {/* 9. Contact Section */}
+      <ContactSection />
     </div>
   );
 }

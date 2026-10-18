@@ -39,7 +39,18 @@ export async function GET() {
       });
     }
 
-    // Fallback: Check if default public/resumes/Avinash_Mishra_Resume.pdf exists
+    // Fallback: Check if default public/resume.pdf or public/resumes/Avinash_Mishra_Resume.pdf exists
+    const directResume = path.join(process.cwd(), "public", "resume.pdf");
+    if (fs.existsSync(directResume)) {
+      const fileBuffer = fs.readFileSync(directResume);
+      return new NextResponse(fileBuffer, {
+        headers: {
+          "Content-Type": "application/pdf",
+          "Content-Disposition": `attachment; filename="${downloadFileName}"`,
+        },
+      });
+    }
+
     const defaultLocalResume = path.join(process.cwd(), "public", "resumes", "Avinash_Mishra_Resume.pdf");
     if (fs.existsSync(defaultLocalResume)) {
       const fileBuffer = fs.readFileSync(defaultLocalResume);

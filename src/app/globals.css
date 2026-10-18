@@ -3,12 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --navy-bg: #070b14;
-  --navy-surface: #0b1120;
-  --gold-primary: #c59b27;
-  --gold-accent: #e9cf8b;
+  --background: #faf9f5;
+  --foreground: #111827;
+  --navy: #0b1120;
+  --accent-blue: #2563eb;
+  --accent-gold: #c59b27;
 }
 
 @layer base {
@@ -26,37 +25,41 @@
   }
 }
 
-/* Gold gradient text utility */
-.gold-gradient-text {
-  background: linear-gradient(135deg, #f2e4b8 0%, #c59b27 50%, #aa801e 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Subtle editorial borders */
+.editorial-border {
+  border-color: rgba(17, 24, 39, 0.08);
 }
 
-.gold-gradient-badge {
-  background: linear-gradient(135deg, rgba(197, 155, 39, 0.15) 0%, rgba(233, 207, 139, 0.05) 100%);
-  border: 1px solid rgba(197, 155, 39, 0.3);
+.editorial-shadow {
+  box-shadow: 0 4px 20px -2px rgba(17, 24, 39, 0.04), 0 2px 6px -1px rgba(17, 24, 39, 0.02);
 }
 
-.gold-glow {
-  box-shadow: 0 0 25px -5px rgba(197, 155, 39, 0.25);
+.editorial-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-card:hover {
+  border-color: rgba(17, 24, 39, 0.18);
+  box-shadow: 0 12px 30px -4px rgba(17, 24, 39, 0.06);
 }
 
 /* Custom subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0b1120;
+  background: #faf9f5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #94a3b8;
 }
