@@ -129,7 +129,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-navy-900 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
-          <p>© {currentYear} Avinash Mishra. All rights reserved.</p>
+          <p suppressHydrationWarning>© {currentYear} Avinash Mishra. All rights reserved.</p>
 
           <div className="flex items-center space-x-4">
             <Link

@@ -72,8 +72,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="min-h-screen flex flex-col bg-[#faf9f5] text-charcoal-900 selection:bg-accent-blue selection:text-white font-sans antialiased">
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <body
+        className="min-h-screen flex flex-col bg-[#faf9f5] text-charcoal-900 selection:bg-accent-blue selection:text-white font-sans antialiased"
+        suppressHydrationWarning
+      >
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
